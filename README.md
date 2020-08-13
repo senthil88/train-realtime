@@ -52,12 +52,14 @@ tape tests/**/*.js
 Admin can able to emit the event about the current train status
 
 ## Admin Screenshots
+![alt text](https://raw.githubusercontent.com/senthil88/train-realtime/master/public/img/admin.png)
 
 ## Understanding User/Guest
 
 Guest User can able to check the train status. Whenevner admin have emit the event, guest user will receive the notification.
 
 ## Guest User Screenshots
+![alt text](https://raw.githubusercontent.com/senthil88/train-realtime/master/public/img/user_alert.png)
 
 
 ## License
