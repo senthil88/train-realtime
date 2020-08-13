@@ -1,0 +1,24 @@
+/var/log/pm2/*log {
+    rotate 5
+    copytruncate
+    missingok
+    notifempty
+    olddir /log/old/pm2
+    sharedscripts
+    dateext
+    dateformat -%Y%m%dT%s
+    size 10k
+    prerotate
+            mkdir -p /log/old/pm2
+    endscript
+    postrotate
+        BUCKET=${LOG_BUCKET}
+        INSTANCE_ID="`wget -qO- http://169.254.169.254/latest/meta-data/instance-id`"
+        YEAR=`date +%Y`
+        MONTH=`date +%m`
+        DATE=`date +%d`
+        ls -l /log/old/pm2/
+        aws s3 sync /log/old/pm2/ s3://${BUCKET}/pm2/${YEAR}/${MONTH}/${DATE}/${INSTANCE_ID}/access-log/ --exclude "*" --include "access*"
+        rm -rfv /log/old/pm2/*
+    endscript
+}

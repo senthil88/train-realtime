@@ -1,0 +1,29 @@
+extends ../layouts/default.pug
+
+block page-header
+  h2 User: ADMIN
+
+block content
+  div.text-center
+    h4 Choose Your Current Station
+    select(name='dropDown', id='city')
+      each val in ['Chennai' , 'Madurai' , 'Trichy', 'Coimbatore', 'Virudhunagar']
+        option=val
+
+  div.row(style={padding: '30px'})
+    table.table.table-bordered
+      tr
+        th Train Name
+        th Train Number
+        th Current Location
+        th Admin Publish Event
+      each train in trains
+        tr
+          td= train[0]
+          td= train[1]
+          td= 'Lat --> '+ train[2][0] + ',   Lng --> '+ train[2][1]
+          td
+            select(name='dropDown', id='admin_event')
+                each event in events
+                    option=event
+
